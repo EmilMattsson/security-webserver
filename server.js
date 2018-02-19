@@ -10,6 +10,9 @@ let port = process.env.PORT || 8000
 
 // config --------------------------------------------------
 
+// Initilize the database asap
+require('./libs/dbHelper').initilize()
+
 // View engine
 app.engine('handlebars', expHbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')

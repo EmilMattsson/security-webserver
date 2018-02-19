@@ -7,3 +7,7 @@ let imageSchema = mongoose.Schema({
   img: { data: Buffer, contentType: String },
   date: { }
 })
+
+// Creating model like an object
+let Image = mongoose.model('Image', imageSchema)
+module.exports = Image
