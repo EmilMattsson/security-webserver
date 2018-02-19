@@ -1,0 +1,19 @@
+body {
+  background-color: #000000;
+}
+
+h1 {
+  color: #e60000;
+  text-align: center;
+  font-size: 30px;
+}
+
+p {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+img {
+  width: 300px;
+  height: 300px; 
+}
