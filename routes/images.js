@@ -7,17 +7,16 @@ router.route('/')
   .get((req, res) => {
     // Called when we want to list all images
     Image.find((err, data) => {
-      console.log(data.img)
       let context = {
         images: data.map((image) => {
+          console.log(image.img.data)
           return {
-            img: data.img.data
+            img: image.img.contentType
           }
         })
       }
+      res.render('images/index', context)
     })
-
-    res.render('images/images', context)
   })
 
 module.exports = router
