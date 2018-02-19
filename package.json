@@ -4,7 +4,8 @@
   "description": "webserver for displaying pictures and maybe videos from the remote security system",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "node server.js"
   },
   "keywords": [
     "security"
