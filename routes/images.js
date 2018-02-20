@@ -11,12 +11,12 @@ router.route('/')
       let counter = 0
       let context = {
         images: data.map((image) => {
+          counter += 1
           fs.writeFile('./images/raspi/image' + counter + '.jpg', image.img.data, 'binary', (err) => {
             if (err) console.error(err)
           })
-          counter += 1
           return {
-            img: '/images/image' + counter + '.jpg'
+            img: '/images/raspi/image' + counter + '.jpg'
           }
         })
       }
