@@ -31,6 +31,8 @@ app.use('/', require('./routes/home.js'))
 app.use('/images', require('./routes/images.js'))
 app.use('/contact', require('./routes/contact.js'))
 app.use('/about', require('./routes/about.js'))
+app.use('/user', require('./routes/user.js'))
+
 // Error handling
 app.use((req, res, next) => {
   res.status(404).send('error/404')
