@@ -7,11 +7,12 @@ router.route('/')
   .get((req, res) => {
     // Called when we want to list all images
     Image.find((err, data) => {
-      console.log(data.img)
+      console.log('Härrrrrr')
+      console.log(data[0].img.data);
       let context = {
         images: data.map((image) => {
           return {
-            img: data.img.data
+            img: data[0].img.data
           }
         })
       }
