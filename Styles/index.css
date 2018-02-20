@@ -23,31 +23,32 @@ p {
 
 .container{
   text-align: center;
+  vertical-align: bottom;
   margin-top: 20px;
-  left: 50%;
+  display: inline-block;
+  overflow: hidden;
 }
 
 .container img {
-  width: 300px;
-  height: 100px;
+  width: 100px;
+  height: 47px;
+  vertical-align: bottom;
 }
 
 .container ul {
-    list-style-type: none;
-    margin: 0;
-    bottom: 0;
-    left: 0;
-    padding: 0;
-    overflow: hidden;
+  list-style: none;
+  padding: 0;
+  width: 500px;
+  margin: 0 auto;
 }
 
-.container li {
+.container ul li {
     border-style: groove;
     border-color: #e60000;
     float: left;
 }
 
-.container li a {
+.container ul li a {
     display: block;
     color: #e60000;
     text-align: center;
@@ -55,18 +56,45 @@ p {
     text-decoration: none;
 }
 
-.container li a:hover {
+.container ul li a:hover {
     background-color: #111;
 }
 
-.container1{
+.homecontainer{
   background-color: #ffffff;
   text-align: center;
   width: 100%;
   height: auto;
 }
 
-.container1 a{
+.homecontainer a{
   color: green;
   font-size: 140px;
+}
+
+.imagecontainer{
+  background-color: #ffffff;
+  width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+.imagecontainer ul{
+  list-style-type: none;
+    margin: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+}
+.imagecontainer ul li{
+  float: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 20px;
+  padding-left: 0;
+}
+
+.imagecontainer ul li img{
+  width: 200px;
+  height: 200px;
 }

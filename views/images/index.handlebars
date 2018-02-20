@@ -7,22 +7,23 @@
   <body>
     <header>
       <div class = container>
-        <img src="../images/logotype.jpg" alt="E&E Security systems logotype">
+        
         <ul>
           <li><a href="../">Home</a></li>
           <li><a href="../images">Images</a></li>
           <li><a href="../contact">Contact</a></li>
           <li><a href="../about">About</a></li>
+          <li><img src="../images/logotype.jpg" alt="E&E Security systems logotype"></li>
         </ul>
       </div>
     </header>
 
-    <div class = container1>
-    <ul>
-      {{#each images}}
-        <li><img src={{ img }} alt="image"/></li>
-      {{/each}}
-    </ul>
+    <div class = imagecontainer>
+      <ul>
+        {{#each images}}
+          <li><img src={{ img }} alt="image"/></li>
+        {{/each}}
+      </ul>
     </div>
   </body>
 </html>
