@@ -3,29 +3,26 @@
 let router = require('express').Router()
 let User = require('../models/User')
 
-router.route('/login')
+router.route('/register')
   .get((req, res) => {
-    res.render('user/login')
+    res.render('user/register')
   })
-  .post((req, res) => {
-    let unvalidatedUsername = req.body.username
-    let unvalidatedPassword = req.body.password
-
-    let user = new User({
-      usernname: unvalidatedUsername,
-      password: unvalidatedPassword
+  .post((req, res, next) => {
+    if (req.body.username &&
+      req.body.password) {
+        var userData = {
+          username: req.body.username,
+          password: req.body.password,
+        }
+        //use schema.create to insert data into the db
+        User.create(userData, function (err, user) {
+          if (err) {
+            return next(err)
+          } else {
+            return res.redirect('/');
+          }
+        });
+      }
     })
-
-    if (unvalidatedUsername.length && unvalidatedPassword.length > 0) {
-      user.save().then(() => {
-        res.redirect('/home')
-      }).catch(err => {
-        console.log(err.message)
-        response.render('user/login', {error: "Username already taken!"})
-      })
-    } else {
-      res.render('user/login', {error: 'You must enter a username and a password'})
-    }
-  })
 
 module.exports = router

@@ -1,9 +1,10 @@
 'use strict'
 
 let mongoose = require('mongoose')
+let bcrypt = require('bcrypt')
 
 // Defining schema
-let userSchema = mongoose.Schema({
+let UserSchema = mongoose.Schema({
   // email: {
   //   type: String,
   //   unique: true,
@@ -18,12 +19,19 @@ let userSchema = mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
-  },
-  passwordConf: {
-    type: String,
-    required: true
+    required: true,
   }
 })
-let User = mongoose.model('User', userSchema)
+
+// hashing a password before saving it to the database
+UserSchema.pre('save', (next) => {
+  let user = this
+  bcrypt.hash(user.password, 10, (err, hash) => {
+    if (err) {
+      return next(err)
+    }
+    user.password = hash
+  })
+})
+let User = mongoose.model('User', UserSchema)
 module.exports = User
