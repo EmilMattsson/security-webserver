@@ -22,11 +22,8 @@ router.route('/login')
           } else if (!user) {
           res.render('error/500')
           }
-          console.log(unauthenticatedUser.password)
-          console.log(user.password)
           bcrypt.compare(unauthenticatedUser.password, user.password, (err, result) => {
           if (result === true) {
-            console.log(user._id)
             req.session.userId = user._id
             console.log(req.session)
 
