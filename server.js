@@ -43,18 +43,18 @@ app.use('/user', require('./routes/user.js'))
 
 // Error handling
 app.use((req, res, next) => {
-  res.status(404).redirect('error/404')
+  res.status(404).render('error/404')
 })
 
 app.use((err, req, res, next) => {
   console.log(err.stack)
-  res.status(401).redirect('error/401')
+  res.status(401).render('error/401')
 })
 
 // four parameters for errors
 app.use((err, req, res, next) => {
   console.log(err.stack)
-  res.status(500).send('Something broke!')
+  res.status(500).render('Something broke!')
 })
 
 // Launch application ---------------------------------------
