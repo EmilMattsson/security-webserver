@@ -4,7 +4,7 @@ let mongoose = require('mongoose')
 let bcrypt = require('bcrypt')
 
 // Defining schema
-let UserSchema = new mongoose.Schema({
+let UserSchema = mongoose.Schema({
   username: {
     type: String,
     unique: true,
@@ -16,29 +16,16 @@ let UserSchema = new mongoose.Schema({
     required: true,
   }
 })
-let User = mongoose.model('User', UserSchema)
 
-//authenticate input againt database
-UserSchema.statics.authenticate = function (username, password, callback) {
-  User.findOne({ username: username })
-    .exec((err, user) => {
-      if (err) {
-        return callback(err)
-      } else if (!user) {
-        let err = new Error('User not found.')
-        err.status = 401
-        return callback(err)
-      }
-      bcrypt.hash(password, 10).then((hash) => {
-        password = hash
-        bcrypt.compare(password, user.password, (err, result) => {
-          if (result === true) {
-            return callback(null, user)
-          } else {
-            return callback()
-          }
-        })
-      })
-    })
-}
+// hashing a password before saving it to the database
+UserSchema.pre('save', (next) => {
+  let user = this
+  bcrypt.hash(user.password, 10, (err, hash) => {
+    if (err) {
+      return next(err)
+    }
+    user.password = hash
+  })
+})
+let User = mongoose.model('User', UserSchema)
 module.exports = User
