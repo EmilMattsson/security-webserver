@@ -4,9 +4,9 @@ let router = require('express').Router()
 let User = require('../models/User')
 let bcrypt = require('bcrypt')
 
-router.route('/register')
+router.route('/login')
   .get((req, res) => {
-    res.render('user/register')
+    res.render('user/login')
   })
   .post((req, res) => {
     if (req.body.username && req.body.password) {
@@ -35,7 +35,7 @@ router.route('/register')
       })
 
     } else {
-      res.render('user/register', {error: 'You must enter a username and a password'})
+      res.render('user/login', {error: 'You must enter a username and a password'})
     }
   })
 
