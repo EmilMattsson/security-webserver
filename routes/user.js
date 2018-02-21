@@ -15,8 +15,8 @@ router.route('/login')
         password: req.body.password
       })
       bcrypt.hash(req.body.password, 10).then((hash) => {
-        user.password = hash
-        unauthenticatedUser.findOne({ username: user.username })
+        unauthenticatedUser.password = hash
+        User.findOne({ username: unauthenticatedUser.username })
           .exec((err, user) => {
             console.log(user)
             if (err) {
@@ -24,8 +24,8 @@ router.route('/login')
             } else if (!user) {
               res.render('error/500')
             }
-            bcrypt.hash(user.password, 10).then((hash) => {
-              user.password = hash
+            bcrypt.hash(unauthenticatedUser.password, 10).then((hash) => {
+              unauthenticatedUser.password = hash
               bcrypt.compare(unauthenticatedUser.password, user.password, (err, result) => {
                 if (result === true) {
                   res.redirect('/images')
