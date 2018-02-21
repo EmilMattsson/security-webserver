@@ -15,14 +15,26 @@ router.route('/register')
         password: req.body.password
       })
       bcrypt.hash(req.body.password, 10).then((hash) => {
-        user.password = hash
-        console.log(user)
-        user.save().then(() => {
-          res.redirect('/')
-        }).catch(err => {
-          console.log(err.message)
-          response.render('user/register', {error: "Username already taken!"})
-        })
+        unauthenticatedUser.password = hash
+        User.findOne({ username: unauthenticatedUser.username })
+          .exec((err, user) => {
+            console.log(user)
+            if (err) {
+              res.render('error/401')
+            } else if (!user) {
+              res.render('error/500')
+            }
+            bcrypt.hash(unauthenticatedUser.password, 10).then((hash) => {
+              unauthenticatedUser.password = hash
+              bcrypt.compare(unauthenticatedUser.password, user.password, (err, result) => {
+                if (result === true) {
+                  res.redirect('/images')
+                } else {
+                  res.render('error/401')
+                }
+              })
+            })
+          })
       })
 
     } else {
