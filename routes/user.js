@@ -23,16 +23,14 @@ router.route('/login')
             res.render('error/500')
           }
           bcrypt.compare(unauthenticatedUser.password, user.password, (err, result) => {
-          if (result === true) {
-            req.session.userId = user._id
-            console.log(req.session)
-
-            res.redirect('/images')
-          } else {
-            res.redirect('/user/login')
-          }
+            if (result === true) {
+              req.session.userId = user._id
+              res.redirect('/images')
+            } else {
+              res.redirect('/user/login')
+            }
+          })
         })
-      })
 
     } else {
       res.render('user/login', {error: 'You must enter a username and a password'})
