@@ -4,6 +4,7 @@ let express = require('express')
 let bodyParser = require('body-parser')
 let expHbs = require('express-handlebars')
 let path = require('path')
+let session = require('express-session')
 
 let app = express()
 let port = process.env.PORT || 8000
@@ -26,6 +27,13 @@ app.use(bodyParser.urlencoded({extended: true}))
 // The framework should look in the folder "public" for static resources
 app.use(express.static(path.join(__dirname, '/')))
 
+// Enable the use of authentification through sessions
+app.use(session({
+  secret: 'emil är bäst',
+  resave: true,
+  saveUninitialized: false
+}))
+
 // Load routes as "mini-apps"
 app.use('/', require('./routes/home.js'))
 app.use('/images', require('./routes/images.js'))
@@ -35,7 +43,12 @@ app.use('/user', require('./routes/user.js'))
 
 // Error handling
 app.use((req, res, next) => {
-  res.status(404).send('error/404')
+  res.status(404).redirect('error/404')
+})
+
+app.use((err, req, res, next) => {
+  console.log(err.stack)
+  res.status(401).redirect('error/401')
 })
 
 // four parameters for errors

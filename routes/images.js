@@ -3,9 +3,10 @@
 let router = require('express').Router()
 let Image = require('../models/Image')
 let fs = require('fs')
+let mid = require('../middleware/mid')
 
 router.route('/')
-  .get((req, res) => {
+  .get(mid.requiresLogin, (req, res) => {
     // Called when we want to list all images
     Image.find((err, data) => {
       let counter = 0
