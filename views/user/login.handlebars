@@ -1,37 +1,16 @@
-<!doctype html>
-<html lang="">
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-    </head>
-    <body>
-      <header>
-       <div class = container>
-         <ul>
-           <li><a id = image href="../"><img  src="../images/logotype.jpg" alt="E&E Security systems logotype"></a></li>
-           <li><a href="../">Home</a></li>
-           <li><a href="../images">Images</a></li>
-           <li><a href="../contact">Contact</a></li>
-           <li><a href="../about">About</a></li>
-           <li><a href="../user/login">Login</a></li>
-         </ul>
-       </div>
-     </header>
-       <div class = homecontainer>
-         <h1>Login</h1>
+<div class = homecontainer>
+  <h1>Login</h1>
 
-          {{#if error}}
-            <p>
-              Error: {{error}}
-            </p>
-          {{/if}}
+  {{#if error}}
+    <p>
+      Error: {{error}}
+    </p>
+  {{/if}}
 
-          <form class="" action="/user/login" method="post">
-            <input type="text" name="username" value=""><br>
-            <input type="password" name="password" value=""><br>
-            <button>Login</button>
-          </form>
-       </div>
-    </body>
-</html>
+  <form class="" action="/user/login" method="post">
+    <input type="text" name="username" value=""><br>
+    <input type="password" name="password" value=""><br>
+    <button>Login</button>
+  </form>
+</div>
 
