@@ -20,14 +20,15 @@ router.route('/login')
           if (err) {
             res.render('error/401')
           } else if (!user) {
-            res.render('error/500')
+            res.render('user/login', {error: 'There is no such user!'})
           } else{
             bcrypt.compare(unauthenticatedUser.password, user.password, (err, result) => {
               if (result === true) {
+                console.log(result)
                 req.session.userId = user._id
                 res.redirect('/images')
               } else {
-                res.redirect('/user/login')
+                res.render('user/login', {error: 'Wrong password!'})
               }
             })
           }
