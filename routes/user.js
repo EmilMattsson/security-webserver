@@ -24,7 +24,6 @@ router.route('/login')
           } else{
             bcrypt.compare(unauthenticatedUser.password, user.password, (err, result) => {
               if (result === true) {
-                console.log(result)
                 req.session.userId = user._id
                 res.redirect('/images')
               } else {
