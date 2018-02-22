@@ -10,7 +10,7 @@ router.route('/login')
   })
   .post((req, res) => {
     if (req.body.username && req.body.password) {
-      let user = new User({
+      let unauthenticatedUser = new User({
         username: req.body.username,
         password: req.body.password
       })
@@ -19,7 +19,9 @@ router.route('/login')
         .exec((err, user) => {
           if (err) {
             res.render('error/401')
-          } 
+          } else if (!user) {
+            res.render('error/500')
+          }
           bcrypt.compare(unauthenticatedUser.password, user.password, (err, result) => {
           if (result === true) {
             req.session.userId = user._id
