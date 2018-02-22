@@ -21,15 +21,16 @@ router.route('/login')
             res.render('error/401')
           } else if (!user) {
             res.render('error/500')
+          } else{
+            bcrypt.compare(unauthenticatedUser.password, user.password, (err, result) => {
+              if (result === true) {
+                req.session.userId = user._id
+                res.redirect('/images')
+              } else {
+                res.redirect('/user/login')
+              }
+            })
           }
-          bcrypt.compare(unauthenticatedUser.password, user.password, (err, result) => {
-            if (result === true) {
-              req.session.userId = user._id
-              res.redirect('/images')
-            } else {
-              res.redirect('/user/login')
-            }
-          })
         })
 
     } else {
