@@ -4,6 +4,7 @@ let router = require('express').Router()
 let User = require('../models/User')
 let bcrypt = require('bcrypt')
 
+// UNUSED CODE
 router.route('/register')
   .get((req, res) => {
     res.render('user/register')
