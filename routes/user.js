@@ -38,4 +38,11 @@ router.route('/login')
     }
   })
 
+router.route('/logout')
+.get((req, res) => {
+  req.session.destroy(function(err) {
+    // cannot access session here 
+  })
+  res.render('user/logout')
+})
 module.exports = router
