@@ -4,6 +4,8 @@ let router = require('express').Router()
 let User = require('../models/User')
 let bcrypt = require('bcrypt')
 
+// Route for registering a new user, but didn't want it possible for anyone to register
+// So if someone would try to access /register in browser nothing will happen
 router.route('/register')
   .get((req, res) => {
     res.render('user/register')
