@@ -1,5 +1,6 @@
 'use strict'
 
+// Function for restricting users that isn't logged in
 function requiresLogin(req, res, next) {
   if (req.session && req.session.userId) {
     return next();
